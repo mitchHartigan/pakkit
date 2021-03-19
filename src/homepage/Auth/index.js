@@ -16,11 +16,19 @@ export default class index extends Component {
     this.setState({ showLogin: !this.state.showLogin });
   };
 
+  // validateEmail = (email) => {
+  //   const regex = /\S+@\S+\.\S+/;
+  //   return regex.test(email);
+  // };
+
   render() {
     return (
       <Container>
         {this.state.showLogin ? (
-          <Login toggleForm={this.toggleForm} />
+          <Login
+            toggleForm={this.toggleForm}
+            validateEmail={this.validateEmail}
+          />
         ) : (
           <Register toggleForm={this.toggleForm} />
         )}

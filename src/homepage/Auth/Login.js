@@ -2,20 +2,41 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import DynamicInput from "../../pack/DynamicInput.elem";
 import { Link } from "react-router-dom";
+import { API_LOGIN } from "../../pack/api";
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
+    this.emailInput = React.createRef();
+    this.passwordInput = React.createRef();
 
     this.state = {
       email: "",
       password: "",
+      validEmail: "",
+      validPassword: "",
+      errorMessage: "",
     };
   }
 
   _handleUpdate = (evt) => {
     const { name, value } = evt.target;
     this.setState({ [name]: value });
+  };
+
+  _postForm = async () => {
+    const { email, password } = this.state;
+    const { token, message } = await API_LOGIN(email, password);
+
+    if (token) {
+      // put token in localstorage.
+      // redirect user to pack.
+    }
+
+    if (message) {
+      // Display error message.
+      this.setState({ errorMessage: message });
+    }
   };
 
   render() {
@@ -28,6 +49,7 @@ export default class Login extends Component {
           <DynamicInput
             inputType="text"
             inputName="email"
+            inputRef={this.emailInput}
             inputValue={email}
             inputPlaceholder="Email"
             fontSize="18"
@@ -42,6 +64,7 @@ export default class Login extends Component {
           <DynamicInput
             inputType="password"
             inputName="password"
+            inputRef={this.passwordInput}
             inputValue={password}
             inputPlaceholder="Password"
             fontSize="18"
@@ -52,7 +75,11 @@ export default class Login extends Component {
           />
         </FieldWrapper>
 
-        <Button>Sign In</Button>
+        {this.state.errorMessage ? (
+          <ErrorMessage>{this.state.errorMessage}</ErrorMessage>
+        ) : null}
+
+        <Button onClick={this._postForm}>Sign In</Button>
         <Link to="/register">
           <RedirectText>Don't have an account? Sign Up instead.</RedirectText>
         </Link>
@@ -82,6 +109,14 @@ const Form = styled.div`
 
 const FieldWrapper = styled.div`
   margin: 25px 60px 15px 60px;
+`;
+
+const ErrorMessage = styled.p`
+  font-family: Alata;
+  font-size: 16px;
+  color: red;
+  width: 100%;
+  text-align: center;
 `;
 
 const Button = styled.button`
