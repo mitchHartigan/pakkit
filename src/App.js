@@ -8,7 +8,8 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import Auth from "./homepage/Auth/index";
+import Login from "./homepage/Auth/Login";
+import Register from "./homepage/Auth/Register";
 
 class App extends React.Component {
   constructor(props) {
@@ -34,8 +35,11 @@ class App extends React.Component {
           <Route path="/pack">
             <BackpackData />
           </Route>
-          <Route path="/auth">
-            <Auth />
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/register">
+            <Register />
           </Route>
         </Switch>
       </Router>

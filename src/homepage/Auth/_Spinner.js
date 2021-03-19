@@ -11,7 +11,7 @@ const Spinner = () => (
         r="20"
         fill="none"
         strokeWidth="4"
-        shape-rendering="geometricPrecision"
+        shapeRendering="geometricPrecision"
       />
     </StyledSpinner>
   </SpinnerContainer>

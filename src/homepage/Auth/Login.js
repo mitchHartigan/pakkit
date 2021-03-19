@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import styled, { keyframes } from "styled-components";
 import DynamicInput from "../../pack/DynamicInput.elem";
-import { Link } from "react-router-dom";
-import { API_LOGIN } from "../../pack/api";
+import { Link, Redirect } from "react-router-dom";
+import { API_LOGIN } from "../../api";
 import Spinner from "./_Spinner";
 
 export default class Login extends Component {
@@ -16,6 +16,7 @@ export default class Login extends Component {
       password: "",
       errorMessage: "",
       displaySpinner: false,
+      redirect: false,
     };
   }
 
@@ -33,6 +34,8 @@ export default class Login extends Component {
     if (token) {
       // put token in localstorage.
       // redirect user to pack.
+      localStorage.setItem("token", token);
+      this.setState({ redirect: true });
     }
 
     if (message) {
@@ -42,7 +45,17 @@ export default class Login extends Component {
   };
 
   render() {
-    const { email, password, errorMessage, displaySpinner } = this.state;
+    const {
+      redirect,
+      email,
+      password,
+      errorMessage,
+      displaySpinner,
+    } = this.state;
+
+    if (redirect) {
+      return <Redirect to="/pack" />;
+    }
 
     return (
       <Form>

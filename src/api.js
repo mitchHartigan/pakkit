@@ -13,3 +13,16 @@ export async function API_LOGIN(email, password) {
   const body = response.json();
   return body;
 }
+
+export async function API_REGISTER(email, password) {
+  const response = await fetch(`${BACKEND_URL}/register`, {
+    method: "POST",
+    body: JSON.stringify({ email: email, password: password }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const body = response.json();
+  return body;
+}
