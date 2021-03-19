@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import DynamicInput from "../../pack/DynamicInput.elem";
 import { Link } from "react-router-dom";
 import { API_LOGIN } from "../../pack/api";
+import Spinner from "./_Spinner";
 
 export default class Login extends Component {
   constructor(props) {
@@ -13,9 +14,8 @@ export default class Login extends Component {
     this.state = {
       email: "",
       password: "",
-      validEmail: "",
-      validPassword: "",
       errorMessage: "",
+      displaySpinner: false,
     };
   }
 
@@ -25,6 +25,8 @@ export default class Login extends Component {
   };
 
   _postForm = async () => {
+    await this.setState({ displaySpinner: true });
+
     const { email, password } = this.state;
     const { token, message } = await API_LOGIN(email, password);
 
@@ -35,12 +37,12 @@ export default class Login extends Component {
 
     if (message) {
       // Display error message.
-      this.setState({ errorMessage: message });
+      this.setState({ errorMessage: message, displaySpinner: false });
     }
   };
 
   render() {
-    const { email, password } = this.state;
+    const { email, password, errorMessage, displaySpinner } = this.state;
 
     return (
       <Form>
@@ -75,9 +77,11 @@ export default class Login extends Component {
           />
         </FieldWrapper>
 
-        {this.state.errorMessage ? (
-          <ErrorMessage>{this.state.errorMessage}</ErrorMessage>
-        ) : null}
+        {displaySpinner ? (
+          <Spinner />
+        ) : (
+          <ErrorMessage>{errorMessage}</ErrorMessage>
+        )}
 
         <Button onClick={this._postForm}>Sign In</Button>
         <Link to="/register">
@@ -120,7 +124,7 @@ const ErrorMessage = styled.p`
 `;
 
 const Button = styled.button`
-  margin: 25px 60px 10px 60px;
+  margin: 15px 60px 10px 60px;
   font-family: Alata;
   font-size: 18px;
   padding: 5px 0px 7px 0px;
