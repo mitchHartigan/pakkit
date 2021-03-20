@@ -31,7 +31,7 @@ export default class BackpackData extends Component {
       this.setState(localState);
     }
 
-    window.onbeforeunload = () => {
+    window.onbeforeunload = async () => {
       localStorage.setItem("state", JSON.stringify(this.state));
     };
   }

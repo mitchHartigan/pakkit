@@ -26,3 +26,26 @@ export async function API_REGISTER(email, password) {
   const body = response.json();
   return body;
 }
+
+export async function API_PUT_PACK(token, pack) {
+  const response = await fetch(`${BACKEND_URL}/pack`, {
+    method: "POST",
+    body: JSON.stringify({ token: token, pack: pack }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const body = response.json();
+  return body;
+}
+
+export async function API_GET_PACK(id) {
+  const response = await fetch(`${BACKEND_URL}/pack/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const body = response.json();
+  return body;
+}
