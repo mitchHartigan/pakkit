@@ -13,9 +13,9 @@ export default class Register extends Component {
     this.confirmPassword = React.createRef();
 
     this.state = {
-      email: "billyray@gmail.com",
-      password: "billyray",
-      confirmPassword: "billyray",
+      email: "",
+      password: "",
+      confirmPassword: "",
       errorMessage: "",
       displaySpinner: false,
     };
@@ -126,13 +126,18 @@ export default class Register extends Component {
         )}
 
         <Button onClick={this._postForm}>Sign Up</Button>
-        <Link to="/login">
+        <Link to="/login" style={LinkStyleOverride}>
           <RedirectText>Already have an account? Sign In instead</RedirectText>
         </Link>
       </Form>
     );
   }
 }
+
+const LinkStyleOverride = {
+  textDecoration: "underline",
+  textDecorationColor: "black",
+};
 
 const Title = styled.h1`
   font-family: Alata;

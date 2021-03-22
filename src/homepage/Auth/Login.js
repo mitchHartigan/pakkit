@@ -97,13 +97,18 @@ export default class Login extends Component {
         )}
 
         <Button onClick={this._postForm}>Sign In</Button>
-        <Link to="/register">
+        <Link to="/register" style={LinkStyleOverride}>
           <RedirectText>Don't have an account? Sign Up instead.</RedirectText>
         </Link>
       </Form>
     );
   }
 }
+
+const LinkStyleOverride = {
+  textDecoration: "underline",
+  textDecorationColor: "black",
+};
 
 const Title = styled.h1`
   font-family: Alata;
