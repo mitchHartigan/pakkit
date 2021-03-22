@@ -73,7 +73,7 @@ export default class Register extends Component {
 
     return (
       <Form>
-        <Title>Login</Title>
+        <Title>Register</Title>
         <FieldWrapper>
           <DynamicInput
             inputType="text"
