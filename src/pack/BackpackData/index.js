@@ -11,6 +11,7 @@ import {
   handleUpdateCategoryTitle,
   handleDeleteCategory,
 } from "../utils";
+import { API_PUT_PACK } from "../../api";
 import { parseDataForVis } from "../utils";
 import styled, { keyframes } from "styled-components";
 import Vis from "../../vis/index";
@@ -23,6 +24,14 @@ export default class BackpackData extends Component {
 
     this.state = defaultState;
   }
+
+  writeState = (state) => {
+    const { online, token } = state;
+
+    if (online && token) {
+      API_PUT_PACK(token, state);
+    }
+  };
 
   componentDidMount() {
     const localState = JSON.parse(localStorage.getItem("state"));
@@ -45,7 +54,9 @@ export default class BackpackData extends Component {
   };
 
   addItem = (category) => {
-    this.setState(handleAddItem(category, this.state));
+    this.setState(handleAddItem(category, this.state), () => {
+      this.writeState(this.state);
+    });
   };
 
   addCategory = () => {

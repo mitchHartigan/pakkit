@@ -2,5 +2,6 @@ export const defaultState = {
   items: {},
   categories: {},
   categoryOrder: [],
-  offline: true,
+  online: false,
+  token: "",
 };
