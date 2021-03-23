@@ -3,37 +3,22 @@ import styled from "styled-components";
 import Button from "./Button";
 import ScrollWrapper from "./ScrollWrapper";
 
-export default class Hero extends React.Component {
-  state = { scrollPos: 0 };
+export default function Hero(props) {
+  const { scrollPos } = props;
 
-  componentDidMount() {
-    window.addEventListener("scroll", this._captureScrollPos);
-  }
+  return (
+    <Container>
+      <HeroTextContainer>
+        <TitleText>Welcome to Pakkit.</TitleText>
+        <SubtitleText>The simplest way to visualize your pack.</SubtitleText>
 
-  _captureScrollPos = () => {
-    this.setState({ scrollPos: window.pageYOffset });
-  };
-
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this._captureScrollPos);
-  }
-
-  render() {
-    const { scrollPos } = this.state;
-    return (
-      <Container>
-        <HeroTextContainer>
-          <TitleText>Welcome to Pakkit.</TitleText>
-          <SubtitleText>The simplest way to visualize your pack.</SubtitleText>
-
-          <ScrollWrapper target="signup-cards">
-            <Button>Get Started</Button>
-          </ScrollWrapper>
-        </HeroTextContainer>
-        <ParallaxBackground scrollPos={scrollPos} src="mountains.png" alt="" />
-      </Container>
-    );
-  }
+        <ScrollWrapper target="signup-cards">
+          <Button>Get Started</Button>
+        </ScrollWrapper>
+      </HeroTextContainer>
+      <ParallaxBackground scrollPos={scrollPos} src="mountains.png" alt="" />
+    </Container>
+  );
 }
 
 const ParallaxBackground = styled.img.attrs((props) => ({
