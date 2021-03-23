@@ -33,6 +33,7 @@ const LinkStyleOverride = {
 const Container = styled.div.attrs((props) => ({
   style: {
     boxShadow: `${props.scrollPos > 0 ? "1px 1px 7px #8c8c89" : "none"}`,
+    backgroundColor: `${props.scrollPos > 0 ? "#f6f5f0" : "transparent"}`,
   },
 }))`
   display: flex;
@@ -43,8 +44,8 @@ const Container = styled.div.attrs((props) => ({
   height: 50px;
   margin-bottom: -45px;
   position: fixed;
-  background-color: #f6f5f0;
   transition: box-shadow 150ms ease-in;
+  transition: background-color 150ms ease-in;
 `;
 
 const Logo = styled.img`

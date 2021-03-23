@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import Button from "./Button";
 import ScrollWrapper from "./ScrollWrapper";
+import animData from "./pakkit_hero_animation.json";
+import LottieAnimation from "./HeroAnimation";
 
 export default function Hero(props) {
   const { scrollPos } = props;
@@ -16,12 +18,14 @@ export default function Hero(props) {
           <Button>Get Started</Button>
         </ScrollWrapper>
       </HeroTextContainer>
-      <ParallaxBackground scrollPos={scrollPos} src="mountains.png" alt="" />
+      <ParallaxBackground scrollPos={scrollPos}>
+        <LottieAnimation lotti={animData} height={959} width={1902} />
+      </ParallaxBackground>
     </Container>
   );
 }
 
-const ParallaxBackground = styled.img.attrs((props) => ({
+const ParallaxBackground = styled.div.attrs((props) => ({
   style: {
     transform: `translate3d(0px, ${props.scrollPos * 0.21}px, 0px)`,
   },
@@ -29,6 +33,7 @@ const ParallaxBackground = styled.img.attrs((props) => ({
   align-self: flex-end;
   width: 100%;
   height: auto;
+  margin-top: -469px;
   z-index: -1;
 `;
 
@@ -62,6 +67,7 @@ const HeroTextContainer = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   padding-top: 10%;
+  margin-bottom: -130px;
   @media (max-width: 1500px) {
     justify-content: center;
     padding-top: 20%;
