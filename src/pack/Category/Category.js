@@ -88,7 +88,7 @@ export default class Category extends Component {
                 </CollapseButton>
 
                 <DeleteButton onClick={this.handleDelete} show={hovered}>
-                  X
+                  <img src="button_close.svg" alt="close button." />
                 </DeleteButton>
               </CategoryControls>
             </CategoryHeader>
@@ -134,6 +134,7 @@ const CollapseButton = styled.button`
   transition: transform 150ms;
   flex-shrink: 0;
   transition: opacity 150ms ease;
+  margin-top: -2px;
 `;
 
 const DeleteButton = styled.button`
